@@ -4,7 +4,7 @@ from agents import build_reader_agent, build_search_agent, writer_chain, critic_
 
 # ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="ResearchMind · AI Research Agent",
+    page_title="Knowledge MAS · AI Research Agent",
     page_icon="🔬",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -321,7 +321,7 @@ for key in ("results", "running", "done"):
 st.markdown("""
 <div class="hero">
     <div class="hero-eyebrow">Multi-Agent AI System</div>
-    <h1>Research<span>Mind</span></h1>
+    <h1>Knowledge<span>MAS</span></h1>
     <p class="hero-sub">
         Four specialized AI agents collaborate — searching, scraping, writing,
         and critiquing — to deliver a polished research report on any topic.
