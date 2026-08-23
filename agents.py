@@ -17,19 +17,46 @@ load_dotenv()
 #     temperature=0
 # )
 llm = ChatGroq(
-    model="llama-3.3-70b-versatile",
+    model="openai/gpt-oss-120b",
     api_key=os.getenv("GROQ_API_KEY"),
     temperature=0,
 )
 
 
-#1st agent 
+# #1st agent 
+# def build_search_agent():
+#     return create_agent(
+#         model = llm,
+#         tools= [web_search]
+#     )
+
 def build_search_agent():
     return create_agent(
-        model = llm,
-        tools= [web_search]
-    )
+        model=llm,
+        tools=[web_search],
+        system_prompt="""
+You are ONLY a web search agent.
 
+Your ONLY available tool is `web_search`.
+
+You MUST use exactly this tool for web research.
+
+Tool schema:
+web_search(query: str)
+
+Rules:
+1. Call ONLY `web_search`.
+2. Never call `web_open`.
+3. Never call `browser_search`.
+4. Never call any tool other than `web_search`.
+5. Never provide cursor, id, URL, or other parameters to web_search.
+6. Every web_search call must contain exactly one argument:
+   {"query": "<natural language search query>"}
+7. Perform at most 3 searches.
+8. After receiving the search results, STOP and return them.
+9. Do not attempt to open, visit, scrape, browse, or inspect URLs.
+"""
+    )
 #2nd agent 
 
 def build_reader_agent():

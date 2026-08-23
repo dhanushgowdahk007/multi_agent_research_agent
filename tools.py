@@ -11,7 +11,15 @@ tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
 @tool
 def web_search(query : str) -> str:
-    """Search the web for recent and reliable information on a topic . Returns Titles , URLs and snippets."""
+    """Search the web using a natural-language search query.
+
+    Args:
+        query: The exact natural-language search query to send to Tavily.
+               Example: "latest developments in multi-agent AI systems 2026"
+
+    Returns:
+        The top search results containing titles, URLs, and snippets.
+    """
     results = tavily.search(query=query,max_results=5)
 
     out = []
